@@ -1,0 +1,232 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,700;0,800;1,100;1,200;1,400;1,500;1,600;1,700;1,800&display=swap');
+
+$c-light : #BFD7EA;
+$c-dark : #0B3954;
+$c-secondary: #EE6123;
+$c-third: #68B0AB;
+
+* {
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+
+input:focus, textarea:focus {
+    outline: none;
+}
+
+button {
+    cursor: pointer;
+}
+
+button, input {
+    padding: 0.5rem 0.8rem;
+}
+
+.link {
+    text-decoration: underline;
+    cursor: pointer;
+
+    &:hover {
+        text-decoration: none;
+    }
+}
+
+body {
+    display:flex;
+    min-height:100vh;
+    background-color: $c-light;
+}
+
+main {
+    text-align: center;
+    display:flex;
+    flex-direction: column;
+    width:100%;
+
+    @media (min-width:900px){
+        max-width: calc(1080px - 4rem);
+        margin:4rem auto;
+    }
+
+    @media (max-width:900px){
+        margin:20px;
+        max-width: calc(100vw - 40px);
+    }
+
+    h1 {
+        font-size:3rem;
+        margin-bottom:2rem;
+    }
+
+    .register, .login {
+        flex-direction: column;
+        padding: 2rem;
+        border-radius: 5px;
+        background-color: $c-dark;
+        color: $c-light;
+        max-width:500px;
+        width:100%;
+        margin:0 auto;
+
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            margin-left: 25%;
+            text-align: left;
+        }
+
+        .input-wrap {
+            display:flex;
+            margin-bottom: 1rem;
+            font-size:1rem;
+            align-items: center;
+
+            label {
+                width: 20%;
+                margin-right:5%;
+                text-align: right;
+            }
+
+            input {
+                width: 75%;
+
+                &.warning {
+                    border: 1px solid red;
+                    background-color: rgb(217, 91, 91);
+                }
+            }
+            
+        }
+
+        &__warning, &__succes {
+            max-height: 0;
+            overflow: hidden;
+            transition: all 1.5s linear;
+        }
+
+        &__warning {
+            color:red;
+        }
+
+        button {
+            background-color: $c-secondary;
+            color: #fff;
+            margin-left: 25%;
+            border:0;
+            font-weight:bold;
+            margin-bottom:0.8rem;
+
+            &:hover {
+                background-color: darken($c-secondary, 10%);
+            }
+        }
+
+        p {
+            margin-left: 25%;
+            text-align: left;
+        }
+    }
+    
+    .register {
+        display:flex;
+    }
+
+    .login {
+        display:none;
+    }
+
+    .chatbox {
+        display:none;
+        flex-wrap:wrap;
+        padding: 1rem;
+        border-radius: 5px;
+        background-color: $c-dark;
+        color: $c-light;
+        max-width:800px;
+        width:100%;
+        margin:0 auto;
+        text-align:center;
+
+        h2 {
+            font-size: 2rem;
+            width:100%;
+            padding-bottom: 1rem;
+            border-bottom: 6px solid $c-light;
+        }
+
+        &__input {
+
+            display:flex;
+            flex-direction: column;
+            width: calc(50% - 3px);
+            padding: 1rem 1rem 0 0;
+
+            h3 {
+                font-size: 1.4rem;
+                margin-bottom: 1rem;
+            }
+
+            label {
+                margin-bottom: 0.8rem;
+            }
+
+            textarea {
+                width: 100%;
+                height: 300px;
+                border:0;
+                background-color: #fff;
+                color: $c-dark;
+                padding: 0.5rem;
+                margin-bottom: 1rem;
+            }
+
+            .chatbox__btn {
+                background-color: $c-secondary;
+                color: #fff;
+                border:0;
+                font-weight:bold;
+
+                &:hover {
+                    background-color: darken($c-secondary, 10%);
+                }
+
+                &:first-of-type {
+                    margin-bottom:0.8rem;
+                }
+            }
+        }
+
+        &__output {
+            width: calc(50% - 3px);
+            border-left: 6px solid $c-light;
+            padding:1rem;
+
+            article {
+                display:flex;
+                flex-direction: column;
+                text-align:left;
+
+                p {
+                    margin-bottom: 0.8rem;
+                }
+
+                q {
+                    background-color: $c-light;
+                    color: $c-dark;
+                    border-radius: 10px;
+                    padding: 0.5rem;
+                }
+
+                &:not(:last-child){
+                    margin-bottom:1.5rem;
+                }
+
+                &.chatbox__message--other {
+                    text-align:right;
+                }
+            }
+        }
+    }
+}

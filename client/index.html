@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Node.js chatroom</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main>
+        <h1>Node.js chatroom</h1>
+        <section class="register">
+            <h2>Register</h2>
+
+            <div class="input-wrap">
+                <label for="username">Username</label>
+                <input id="username" class="register__username" type="text">
+            </div>
+            
+            <div class="input-wrap">
+                <label for="password">Password</label>
+                <input class="register__password" type="password">
+            </div>
+            
+            <div class="input-wrap">    
+                <label for="confirm-password">Confirm password</label>
+                <input id="confirm-password" class="register__confirm-password" type="password">
+            </div>
+
+            <p class="register__succes">Register succesfull!</p>
+            <p class="register__warning">Passwords do not match, try again!</p>
+
+            <button>Register</button>
+
+            <p>Already registered? <span class="link">Login</span></p>
+        </section>
+        
+        <section class="login">
+            <h2>Login</h2>
+
+            <div class="input-wrap">
+                <label for="username">Username</label>
+                <input id="username" class="login__username" type="text">
+            </div>
+            
+            <div class="input-wrap">
+                <label for="password">Password</label>
+                <input class="login__password" type="password">
+            </div>
+
+            <p class="login__succes">Login succesfull!</p>
+            <p class="login__warning login__warning-username">Username doesn't, try again or register via the link below!</p>
+            <p class="login__warning login__warning-password">Password failed, try again!</p>
+
+            <button>Login</button>
+
+            <p>Need to register? <span class="link">Register</span></p>
+        </section>
+
+        <section class="chatbox">
+            <h2>Chatbox</h2>
+            <section class="chatbox__input">
+                <h3>Welcome user</h3>
+                <label for="message">Please type in your message</label>
+                <textarea id="message" class="chatbox__message"></textarea>
+                <button class="chatbox__btn btn__send-to-all">Send to all users</button>
+                <button class="chatbox__btn btn__send-to-self">Send to yourself</button>
+            </section>
+            <section class="chatbox__output">
+            </section>
+        </section>
+    </main>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
