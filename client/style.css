@@ -169,9 +169,64 @@ main .chatbox {
 
 main .chatbox h2 {
   font-size: 2rem;
-  width: 100%;
+  width: 50%;
   padding-bottom: 1rem;
   border-bottom: 6px solid #BFD7EA;
+  text-align: left;
+}
+
+main .chatbox nav {
+  width: 50%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  border-bottom: 6px solid #BFD7EA;
+}
+
+main .chatbox nav button {
+  background-color: #EE6123;
+  color: #fff;
+  border: 0;
+  font-weight: bold;
+  margin: auto 0;
+  margin-bottom: 1rem;
+}
+
+main .chatbox nav button:hover {
+  background-color: #ce4a10;
+}
+
+main .chatbox__online-users {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 1rem 0;
+  border-bottom: 6px solid #BFD7EA;
+}
+
+main .chatbox__online-users p {
+  margin-right: 0.4rem;
+}
+
+main .chatbox__online-users ul {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  list-style: none;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+main .chatbox__online-users ul li:not(:last-child) {
+  margin-right: 0.2rem;
+}
+
+main .chatbox__online-users ul li:not(:last-child):after {
+  content: ',';
 }
 
 main .chatbox__input {
@@ -238,7 +293,7 @@ main .chatbox__output article {
 }
 
 main .chatbox__output article p {
-  margin-bottom: 0.8rem;
+  margin-bottom: 0.3rem;
 }
 
 main .chatbox__output article q {
@@ -254,5 +309,14 @@ main .chatbox__output article:not(:last-child) {
 
 main .chatbox__output article.chatbox__message--other {
   text-align: right;
+}
+
+main .chatbox__output article.chatbox__message--self {
+  width: 75%;
+  margin-left: 25%;
+}
+
+main .chatbox__output article.chatbox__message--self q {
+  background-color: #72a7d1;
 }
 /*# sourceMappingURL=style.css.map */

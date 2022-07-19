@@ -14,6 +14,8 @@ const chatboxUsernameEl = document.querySelector(".chatbox .chatbox__input h3");
 const chatboxSubmitToAllBtn = document.querySelector(".chatbox .btn__send-to-all");
 const chatboxSubmitToSelfBtn = document.querySelector(".chatbox .btn__send-to-self");
 const chatboxOutput = document.querySelector(".chatbox .chatbox__output");
+const chatboxLogoutBtn = document.querySelector(".chatbox .chatbox__logout");
+const chatboxOnlineUsersList = document.querySelector(".chatbox .chatbox__online-users ul");
 
 const loadLoginModal = () => {
     registerModal.style.display = "none";
@@ -96,9 +98,17 @@ const login = () => {
 
 const enterChatbox = (username) => {
     loginModal.style.display = "none";
+    socket.emit('logIn', (username));
     chatbox.style.display = "flex";
     chatboxUsernameEl.innerText = `Welcome ${username}`;
     chatboxUsernameEl.dataset.username = username;
+}
+
+const logout = () => {
+    let username = chatboxUsernameEl.dataset.username;
+    loginModal.style.display = "flex";
+    socket.emit('logOut', (username));
+    chatbox.style.display = "none";
 }
 
 const submitToAll = () => {
@@ -135,6 +145,9 @@ socket.on('displayMessage', (message, username, audience) => {
     if (username === chatboxUsernameEl.dataset.username) {
         username = "You";
     };
+    if (audience === "self") {
+        article.classList.add("chatbox__message--self");
+    }
     let infoUserTextNode = document.createTextNode(`${username} wrote to ${audience}:`);
     let chatMessage = document.createElement("q");
     let chatMessageTextNode = document.createTextNode(message);
@@ -143,6 +156,23 @@ socket.on('displayMessage', (message, username, audience) => {
     article.appendChild(infoUser);
     article.appendChild(chatMessage);
     chatboxOutput.appendChild(article);
+});
+
+socket.on('displayUsers', (usersArr) => {
+    chatboxOnlineUsersList.innerHTML = "";
+    console.log(usersArr);
+    usersArr.forEach(user => {
+        let listItem = document.createElement("li");
+        let listItemTextNode = document.createTextNode(user);
+        if(user === chatboxUsernameEl.dataset.username){
+            let boldTag = document.createElement("b");
+            listItem.appendChild(boldTag);
+            boldTag.appendChild(listItemTextNode);
+        } else {
+            listItem.appendChild(listItemTextNode);
+        }
+        chatboxOnlineUsersList.appendChild(listItem);
+    });
 });
 
 
@@ -155,4 +185,5 @@ loginModalButton.addEventListener("click", login);
 chatboxSubmitToAllBtn.addEventListener("click", submitToAll);
 chatboxSubmitToSelfBtn.addEventListener("click", submitToSelf);
 
-
+chatboxLogoutBtn.addEventListener("click", logout);
+window.addEventListener("beforeunload", logout);
