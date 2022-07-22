@@ -6,8 +6,10 @@ const clientPath = `${__dirname}/../client`;
 app.use(express.static(clientPath));
 const server = http.createServer(app);
 
+const port = process.env.PORT || 8080;
+
 server.listen(8080, () => {
-    console.log("server running on port 8080");
+    console.log("server running on port " + port);
 });
 
 const io = require("socket.io")(server);
