@@ -148,13 +148,13 @@ main .register {
 }
 
 main .login {
-  display: none;
-}
-
-main .chatbox {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+}
+
+main .chatbox {
+  display: none;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
   padding: 1rem;
@@ -263,12 +263,12 @@ main .chatbox__input .message-choice-wrapper input[type='radio'] {
 }
 
 main .chatbox__input .message-choice-wrapper input[type='radio']:checked + label {
-  background-color: #3d7571;
+  background-color: #4f9691;
 }
 
 main .chatbox__input .message-choice-wrapper label {
   width: calc(50% - 1px);
-  background-color: #4f9691;
+  background-color: #3d7571;
   padding: 0.5rem 0.8rem;
   cursor: pointer;
   color: #fff;
@@ -279,7 +279,7 @@ main .chatbox__input .message-choice-wrapper label:first-of-type {
 }
 
 main .chatbox__input .message-choice-wrapper label:hover {
-  background-color: #3d7571;
+  background-color: #4f9691;
 }
 
 main .chatbox__input .label-message {

@@ -134,11 +134,11 @@ main {
     }
 
     .login {
-        display:none;
+        display:flex;
     }
 
     .chatbox {
-        display:flex;
+        display:none;
         flex-wrap:wrap;
         padding: 1rem;
         border-radius: 5px;
@@ -229,13 +229,13 @@ main {
                     display: none;
 
                     &:checked + label {
-                            background-color: darken($c-third, 20%);
+                            background-color: darken($c-third, 10%);
                     }
                 }
 
                 label {
                     width:calc(50% - 1px);
-                    background-color: darken($c-third, 10%);
+                    background-color: darken($c-third, 20%);
                     padding: 0.5rem 0.8rem;
                     cursor:pointer;
                     color:#fff;
@@ -245,7 +245,7 @@ main {
                     }
 
                     &:hover {
-                        background-color: darken($c-third, 20%);
+                        background-color: darken($c-third, 10%);
                     }
                 }
             }
