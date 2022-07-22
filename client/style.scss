@@ -213,7 +213,7 @@ main {
 
             h3 {
                 font-size: 1.4rem;
-                margin-bottom: 1rem;
+                margin-bottom: 0.2rem;
             }
 
             label {
@@ -249,7 +249,7 @@ main {
         &__output {
             width: calc(50% - 3px);
             border-left: 6px solid $c-light;
-            padding:1rem;
+            padding:1rem 0 0 1rem;
 
             article {
                 display:flex;
@@ -277,7 +277,7 @@ main {
 
                 &.chatbox__message--self {
                     width:75%;
-                    margin-left:25%;
+                    margin-right:25%;
                     q {
                         background-color: darken($c-light, 20%);
                     }

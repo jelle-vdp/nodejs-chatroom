@@ -127,11 +127,11 @@ const submitToSelf = () => {
     document.querySelector(".chatbox textarea").value = "";
 }
 
-socket.on('sendToAll', (message, username, audience) =>{
+socket.on('sendToAll', (message, username, audience) => {
     io.emit("displayMessage", (message, username, audience));
 });
 
-socket.on('sendToMe', (message, username, audience) =>{
+socket.on('sendToMe', (message, username, audience) => {
     io.emit("displayMessage", (message, username, audience));
 });
 
@@ -159,22 +159,24 @@ socket.on('displayMessage', (message, username, audience) => {
 });
 
 socket.on('displayUsers', (usersArr) => {
-    chatboxOnlineUsersList.innerHTML = "";
     console.log(usersArr);
+    chatboxOnlineUsersList.innerHTML = "";
+    let liYou = document.createElement("li");
+    let bold = document.createElement("b");
+    let liYouTextNode = document.createTextNode("You");
+    liYou.appendChild(bold);
+    bold.appendChild(liYouTextNode);
+    chatboxOnlineUsersList.appendChild(liYou);
     usersArr.forEach(user => {
-        let listItem = document.createElement("li");
-        let listItemTextNode = document.createTextNode(user);
-        if(user === chatboxUsernameEl.dataset.username){
-            let boldTag = document.createElement("b");
-            listItem.appendChild(boldTag);
-            boldTag.appendChild(listItemTextNode);
-        } else {
-            listItem.appendChild(listItemTextNode);
+        if (user !== chatboxUsernameEl.dataset.username) {
+            let li = document.createElement("li");
+            let liTextNode = document.createTextNode(user);
+            li.appendChild(liTextNode);
+            console.log("li is", li);
+            chatboxOnlineUsersList.appendChild(li);
         }
-        chatboxOnlineUsersList.appendChild(listItem);
     });
 });
-
 
 registerModalLink.addEventListener("click", loadLoginModal);
 loginModalLink.addEventListener("click", loadRegisterModal);
@@ -186,4 +188,3 @@ chatboxSubmitToAllBtn.addEventListener("click", submitToAll);
 chatboxSubmitToSelfBtn.addEventListener("click", submitToSelf);
 
 chatboxLogoutBtn.addEventListener("click", logout);
-window.addEventListener("beforeunload", logout);
