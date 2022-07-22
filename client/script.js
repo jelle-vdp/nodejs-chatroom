@@ -11,8 +11,10 @@ const loginModalButton = document.querySelector(".login button");
 
 const chatbox = document.querySelector(".chatbox");
 const chatboxUsernameEl = document.querySelector(".chatbox .chatbox__input h3");
-const chatboxSubmitToAllBtn = document.querySelector(".chatbox .btn__send-to-all");
-const chatboxSubmitToSelfBtn = document.querySelector(".chatbox .btn__send-to-self");
+const chatboxCheckboxAllEl = document.querySelector(".chatbox .message-to-all");
+const chatboxCheckboxSelfEl = document.querySelector(".chatbox .message-to-self");
+const chatboxTextarea = document.querySelector(".chatbox textarea");
+const chatboxSubmitBtn = document.querySelector(".chatbox .chatbox__btn");
 const chatboxOutput = document.querySelector(".chatbox .chatbox__output");
 const chatboxLogoutBtn = document.querySelector(".chatbox .chatbox__logout");
 const chatboxOnlineUsersList = document.querySelector(".chatbox .chatbox__online-users ul");
@@ -104,27 +106,40 @@ const enterChatbox = (username) => {
     chatboxUsernameEl.dataset.username = username;
 }
 
+const typingInTextarea = () => {
+    let username = chatboxUsernameEl.dataset.username;
+    let triggerTypeMsg = false;
+    if (chatboxTextarea.value.length > 0 && chatboxCheckboxAllEl.checked === true && triggerTypeMsg === false) {
+        triggerTypeMsg = true;
+    } else {
+        triggerTypeMsg = false;
+    }
+    if (triggerTypeMsg){
+        socket.emit('typing', (username));
+    } else {
+        socket.emit('stoppedTyping', (username));
+    }
+}
+
+const submitMsg = () => {
+    let msg = document.querySelector(".chatbox textarea").value;
+    let username = chatboxUsernameEl.dataset.username;
+    if(chatboxCheckboxAllEl.checked === true){
+        let dataArr = [msg, username, "all"];
+        socket.emit('sendToAll', (dataArr));
+    } else {
+        let dataArr = [msg, username, "self"];
+        socket.emit('sendToMe', (dataArr));
+    }
+    chatboxTextarea.value = "";
+    socket.emit('stoppedTyping', (username));
+}
+
 const logout = () => {
     let username = chatboxUsernameEl.dataset.username;
     loginModal.style.display = "flex";
     socket.emit('logOut', (username));
     chatbox.style.display = "none";
-}
-
-const submitToAll = () => {
-    let msg = document.querySelector(".chatbox textarea").value;
-    let username = chatboxUsernameEl.dataset.username;
-    let dataArr = [msg, username, "all"];
-    socket.emit('sendToAll', (dataArr));
-    document.querySelector(".chatbox textarea").value = "";
-};
-
-const submitToSelf = () => {
-    let msg = document.querySelector(".chatbox textarea").value;
-    let username = chatboxUsernameEl.dataset.username;
-    let dataArr = [msg, username, "self"];
-    socket.emit('sendToMe', (dataArr));
-    document.querySelector(".chatbox textarea").value = "";
 }
 
 socket.on('sendToAll', (message, username, audience) => {
@@ -155,11 +170,52 @@ socket.on('displayMessage', (message, username, audience) => {
     chatMessage.appendChild(chatMessageTextNode);
     article.appendChild(infoUser);
     article.appendChild(chatMessage);
-    chatboxOutput.appendChild(article);
+    if (document.querySelector(".chatbox__typing")) {
+        chatboxOutput.insertBefore(article, document.querySelector(".chatbox__typing"));
+    } else {
+        chatboxOutput.appendChild(article);
+    }
+});
+
+
+socket.on('displayTyping', (typingUsers) => {
+
+    
+    document.querySelectorAll(".chatbox__typing").forEach(paragraph => {
+        paragraph.remove();
+    });
+
+    typingUsers.forEach(username => {
+        if (username !== chatboxUsernameEl.dataset.username) {
+            let paragraph = document.createElement("p");
+            paragraph.classList.add("chatbox__typing");
+            paragraph.classList.add(`chatbox__typing--${username}`);
+            let typingTextNode = document.createTextNode(`${username} is typing...`);
+            paragraph.appendChild(typingTextNode);
+            chatboxOutput.appendChild(paragraph);
+        }
+    })
+});
+
+socket.on('removeTyping', (typingUsers) => {
+
+    document.querySelectorAll(".chatbox__typing").forEach(paragraph => {
+        paragraph.remove();
+    });
+
+    typingUsers.forEach(username => {
+        if (username !== chatboxUsernameEl.dataset.username) {
+            let paragraph = document.createElement("p");
+            paragraph.classList.add("chatbox__typing");
+            paragraph.classList.add(`chatbox__typing--${username}`);
+            let typingTextNode = document.createTextNode(`${username} is typing...`);
+            paragraph.appendChild(typingTextNode);
+            chatboxOutput.appendChild(paragraph);
+        }
+    });
 });
 
 socket.on('displayUsers', (usersArr) => {
-    console.log(usersArr);
     chatboxOnlineUsersList.innerHTML = "";
     let liYou = document.createElement("li");
     let bold = document.createElement("b");
@@ -172,7 +228,6 @@ socket.on('displayUsers', (usersArr) => {
             let li = document.createElement("li");
             let liTextNode = document.createTextNode(user);
             li.appendChild(liTextNode);
-            console.log("li is", li);
             chatboxOnlineUsersList.appendChild(li);
         }
     });
@@ -184,7 +239,8 @@ loginModalLink.addEventListener("click", loadRegisterModal);
 registerModalButton.addEventListener("click", register);
 loginModalButton.addEventListener("click", login);
 
-chatboxSubmitToAllBtn.addEventListener("click", submitToAll);
-chatboxSubmitToSelfBtn.addEventListener("click", submitToSelf);
+chatboxTextarea.addEventListener("keyup", typingInTextarea);
+
+chatboxSubmitBtn.addEventListener("click", submitMsg);
 
 chatboxLogoutBtn.addEventListener("click", logout);

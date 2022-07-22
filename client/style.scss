@@ -130,11 +130,11 @@ main {
     }
     
     .register {
-        display:flex;
+        display:none;
     }
 
     .login {
-        display:none;
+        display:flex;
     }
 
     .chatbox {
@@ -213,10 +213,44 @@ main {
 
             h3 {
                 font-size: 1.4rem;
-                margin-bottom: 0.2rem;
+                margin-bottom: 0.8rem;
             }
 
-            label {
+            p {
+                margin-bottom:0.5rem;
+            }
+
+            .message-choice-wrapper {
+                display:flex;
+                width: 100%;
+                margin-bottom: 1rem;
+
+                input[type='radio']{
+                    display: none;
+
+                    &:checked + label {
+                            background-color: darken($c-third, 20%);
+                    }
+                }
+
+                label {
+                    width:calc(50% - 1px);
+                    background-color: darken($c-third, 10%);
+                    padding: 0.5rem 0.8rem;
+                    cursor:pointer;
+                    color:#fff;
+
+                    &:first-of-type {
+                        border-right:2px solid darken($c-third, 40%);
+                    }
+
+                    &:hover {
+                        background-color: darken($c-third, 20%);
+                    }
+                }
+            }
+
+            .label-message {
                 margin-bottom: 0.8rem;
             }
 
@@ -238,10 +272,6 @@ main {
 
                 &:hover {
                     background-color: darken($c-secondary, 10%);
-                }
-
-                &:first-of-type {
-                    margin-bottom:0.8rem;
                 }
             }
         }
@@ -282,6 +312,10 @@ main {
                         background-color: darken($c-light, 20%);
                     }
                 }
+            }
+
+            .chatbox__typing {
+                margin-bottom:0.4rem;
             }
         }
     }

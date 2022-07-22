@@ -144,13 +144,13 @@ main .register p, main .login p {
 }
 
 main .register {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
+  display: none;
 }
 
 main .login {
-  display: none;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
 }
 
 main .chatbox {
@@ -243,10 +243,46 @@ main .chatbox__input {
 
 main .chatbox__input h3 {
   font-size: 1.4rem;
-  margin-bottom: 0.2rem;
+  margin-bottom: 0.8rem;
 }
 
-main .chatbox__input label {
+main .chatbox__input p {
+  margin-bottom: 0.5rem;
+}
+
+main .chatbox__input .message-choice-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+main .chatbox__input .message-choice-wrapper input[type='radio'] {
+  display: none;
+}
+
+main .chatbox__input .message-choice-wrapper input[type='radio']:checked + label {
+  background-color: #3d7571;
+}
+
+main .chatbox__input .message-choice-wrapper label {
+  width: calc(50% - 1px);
+  background-color: #4f9691;
+  padding: 0.5rem 0.8rem;
+  cursor: pointer;
+  color: #fff;
+}
+
+main .chatbox__input .message-choice-wrapper label:first-of-type {
+  border-right: 2px solid #1a3230;
+}
+
+main .chatbox__input .message-choice-wrapper label:hover {
+  background-color: #3d7571;
+}
+
+main .chatbox__input .label-message {
   margin-bottom: 0.8rem;
 }
 
@@ -269,10 +305,6 @@ main .chatbox__input .chatbox__btn {
 
 main .chatbox__input .chatbox__btn:hover {
   background-color: #ce4a10;
-}
-
-main .chatbox__input .chatbox__btn:first-of-type {
-  margin-bottom: 0.8rem;
 }
 
 main .chatbox__output {
@@ -318,5 +350,9 @@ main .chatbox__output article.chatbox__message--self {
 
 main .chatbox__output article.chatbox__message--self q {
   background-color: #72a7d1;
+}
+
+main .chatbox__output .chatbox__typing {
+  margin-bottom: 0.4rem;
 }
 /*# sourceMappingURL=style.css.map */

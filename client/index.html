@@ -23,7 +23,7 @@
                 <input class="register__password" type="password">
             </div>
             
-            <div class="input-wrap">    
+            <div class="input-wrap">   
                 <label for="confirm-password">Confirm password</label>
                 <input id="confirm-password" class="register__confirm-password" type="password">
             </div>
@@ -55,7 +55,7 @@
 
             <button>Login</button>
 
-            <p>Need to register? <span class="link">Register</span></p>
+            <p>Not registered yet? <span class="link">Register</span></p>
         </section>
 
         <section class="chatbox">
@@ -69,10 +69,17 @@
             </section>
             <section class="chatbox__input">
                 <h3>Welcome user</h3>
-                <label for="message">Please type in your message</label>
+                <p>Do you want to send your message to all or only to yourself?</p>
+                <div class="message-choice-wrapper">
+                    <input type="radio" name="message-to" id="message-to-all" class="message-to-all" checked>
+                    <label for="message-to-all">Message to all</label>
+                    <input type="radio" name="message-to" id="message-to-self" class="message-to-self" >
+                    <label for="message-to-self">Message to self</label>
+                </div>
+                
+                <label class="label-message" for="message">Please type in your message</label>
                 <textarea id="message" class="chatbox__message"></textarea>
-                <button class="chatbox__btn btn__send-to-all">Send to all users</button>
-                <button class="chatbox__btn btn__send-to-self">Send to yourself</button>
+                <button class="chatbox__btn">Send message</button>
             </section>
             <section class="chatbox__output">
             </section>
