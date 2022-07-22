@@ -134,11 +134,11 @@ main {
     }
 
     .login {
-        display:flex;
+        display:none;
     }
 
     .chatbox {
-        display:none;
+        display:flex;
         flex-wrap:wrap;
         padding: 1rem;
         border-radius: 5px;
@@ -316,6 +316,31 @@ main {
 
             .chatbox__typing {
                 margin-bottom:0.4rem;
+
+                span {
+                    width:4px;
+                    height:4px;
+                    border-radius:50%;
+                    background-color: $c-light;
+                    display:inline-block;
+                    opacity:0.5;
+
+                    @for $i from 1 through 3 {
+                        &:nth-of-type(#{$i}) {
+                            animation: 1s blink infinite ($i * .3333s);
+                        }
+                    }
+                    
+                    &:not(:last-child){
+                        margin-right:4px;
+                    }
+                }
+
+                @keyframes blink {
+                    50% {
+                      opacity: 1;
+                    }
+                  }
             }
         }
     }

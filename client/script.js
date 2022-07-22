@@ -188,10 +188,16 @@ socket.on('displayTyping', (typingUsers) => {
     typingUsers.forEach(username => {
         if (username !== chatboxUsernameEl.dataset.username) {
             let paragraph = document.createElement("p");
+            let span1 = document.createElement("span");
+            let span2 = document.createElement("span");
+            let span3 = document.createElement("span");
             paragraph.classList.add("chatbox__typing");
             paragraph.classList.add(`chatbox__typing--${username}`);
-            let typingTextNode = document.createTextNode(`${username} is typing...`);
+            let typingTextNode = document.createTextNode(`${username} is typing `);
             paragraph.appendChild(typingTextNode);
+            paragraph.appendChild(span1);
+            paragraph.appendChild(span2);
+            paragraph.appendChild(span3);
             chatboxOutput.appendChild(paragraph);
         }
     })
@@ -206,10 +212,16 @@ socket.on('removeTyping', (typingUsers) => {
     typingUsers.forEach(username => {
         if (username !== chatboxUsernameEl.dataset.username) {
             let paragraph = document.createElement("p");
+            let span1 = document.createElement("span");
+            let span2 = document.createElement("span");
+            let span3 = document.createElement("span");
             paragraph.classList.add("chatbox__typing");
             paragraph.classList.add(`chatbox__typing--${username}`);
-            let typingTextNode = document.createTextNode(`${username} is typing...`);
+            let typingTextNode = document.createTextNode(`${username} is typing `);
             paragraph.appendChild(typingTextNode);
+            paragraph.appendChild(span1);
+            paragraph.appendChild(span2);
+            paragraph.appendChild(span3);
             chatboxOutput.appendChild(paragraph);
         }
     });
